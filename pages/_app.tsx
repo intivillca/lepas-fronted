@@ -1,8 +1,20 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
+import { fetchAPI } from "../api/api";
+import "../styles/global.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  console.log(pageProps);
+  return <Component {...pageProps} />;
 }
 
-export default MyApp
+export async function getStaticProps() {
+  const globalRes = await fetchAPI("/global", {
+    populate: "*",
+  });
+  console.log(globalRes);
+
+  return {
+    pageProps: { global: globalRes },
+  };
+}
+export default MyApp;
