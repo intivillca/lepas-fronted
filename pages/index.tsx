@@ -1,14 +1,38 @@
 import type { NextPage } from "next";
+import { fetchAPI } from "../api/api";
 import { styled } from "../stitches.config";
 
-const Home: NextPage = () => {
+interface Props {
+  global: unknown;
+}
+
+const Home: NextPage<Props> = ({ global }) => {
   return (
+    <>
     <Flex>
       <Test>TEST {process.env.API_URL}</Test>
       <Test>TEST {process.env.API_URL}</Test>
     </Flex>
+    <pre>
+      {JSON.stringify(global)}
+    </pre>
+    </>
   );
 };
+
+export async function getServerSideProps() {
+  const globalRes = await fetchAPI("/global", {
+    populate: {
+      navigation: '*',
+      footerlinks: '*',
+    },
+  });
+  console.log({ globalRes });
+
+  return {
+    props: { global: globalRes },
+  };
+}
 
 export const Flex = styled("div", {
   display: "flex",
