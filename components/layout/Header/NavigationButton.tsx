@@ -32,6 +32,7 @@ const ListLink = styled("a", {
   MozTransition: "all 0.2s ease-in-out",
   OTransition: "all 0.2s ease-in-out",
   transition: "all 0.2s ease-in-out",
+  fontFamily: "'Baloo Tamma 2', cursive",
   cursor: "pointer",
   "&:hover": {
     color: "$pink800",

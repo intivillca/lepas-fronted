@@ -1,28 +1,38 @@
 import type { NextPage } from "next";
+import Image from "next/image";
 import { fetchAPI } from "../api/api";
-import { AnimalCardProps } from "../components/elements/AnimalCard/AnimalCard";
+import {
+  AnimalCard,
+  AnimalCardProps,
+} from "../components/elements/AnimalCard/AnimalCard";
 import { AnimalCardGroup } from "../components/elements/AnimalCardGroup/DogCardGroup";
 import { Carousel } from "../components/elements/Carousel/Carousel";
 import { CursiveHeading } from "../components/elements/CursiveHeading/CursiveHeading";
+import { ItemCard } from "../components/elements/ItemCard/ItemCard";
 import { PinkSection } from "../components/sections/PinkSection";
 import { PinkWavySection } from "../components/sections/PinkWavySection";
+import { SectionWrapper } from "../components/sections/SectionWrapper";
+import { TextSection } from "../components/sections/TextSection";
 import { WhiteSection } from "../components/sections/WhiteSection";
+import { styled } from "../stitches.config";
 import { Pas, PasComponent } from "../types/DataTypes";
-import { ImageBase } from "../utils/parseImageLink";
+import { getImageAlt, getImageLink, ImageBase } from "../utils/parseImageLink";
 
 interface HomeProps {
   slike: ImageBase[];
-  psi: PasComponent[];
-  macke: {}[];
+  psi: any;
+  macke: any;
+  onama: any;
+  akcije: any;
 }
 
-const ParsePsi = (psi: PasComponent[]): AnimalCardProps[] => {
+const ParsePsi = (psi: any[]): AnimalCardProps[] => {
   const parsedPsi = psi.map((pas) => {
     return [
       {
-        ime: pas.pas.data.attributes.ime,
-        slika: pas.pas.data.attributes.slika,
-        slug: pas.pas.data.attributes.slug,
+        ime: pas.attributes.ime,
+        slika: pas.attributes.slika,
+        slug: pas.attributes.slug,
         path: "psi",
       },
     ];
@@ -35,9 +45,9 @@ const ParseMacke = (macke: any[]): AnimalCardProps[] => {
   const parsedMacke = macke.map((macka) => {
     return [
       {
-        ime: macka.macka.data.attributes.ime,
-        slika: macka.macka.data.attributes.slika,
-        slug: macka.macka.data.attributes.slug,
+        ime: macka.attributes.ime,
+        slika: macka.attributes.slika,
+        slug: macka.attributes.slug,
         path: "macke",
       },
     ];
@@ -46,30 +56,42 @@ const ParseMacke = (macke: any[]): AnimalCardProps[] => {
   return ret;
 };
 
-const Home: NextPage<HomeProps> = ({ slike, psi, macke }: HomeProps) => {
-  console.log(macke);
-  return (
-    <>
-      <PinkSection>
-        <Carousel slides={slike} />
-      </PinkSection>
-      <div style={{ marginBottom: "60px" }}></div>
-      <PinkSection>
-        <CursiveHeading headingColor="pink">Novi PSI</CursiveHeading>
-        <AnimalCardGroup animals={ParsePsi(psi)} />
-      </PinkSection>
-      <WhiteSection>
-        <CursiveHeading headingColor="pink">Nove Macke</CursiveHeading>
-        <AnimalCardGroup animals={ParseMacke(macke)} />
-      </WhiteSection>
-    </>
-  );
+const Home: NextPage<HomeProps> = ({
+  slike,
+  psi,
+  macke,
+  onama,
+  akcije,
+}: HomeProps) => {
+  console.log(akcije);
+  return <></>;
 };
+
+const ImageContainer = styled("div", {
+  position: "relative",
+  aspectRatio: 13 / 16,
+  width: "30%",
+  maxWidth: "$xl2",
+  height: "auto",
+  objectFit: "cover",
+  border: "10px solid",
+  borderColor: "$pink700",
+  margin: "60px auto",
+  FontFamily: "Montserrat",
+  padding: "60px",
+  overflow: "hidden",
+});
 
 export async function getStaticProps() {
   const APIRes = await fetchAPI("/o-nama", {
     populate: {
       slike: "*",
+      onama: {
+        populate: "*",
+      },
+      akcije: {
+        populate: "*",
+      },
       psi: {
         populate: {
           pas: {
@@ -91,6 +113,8 @@ export async function getStaticProps() {
       slike: APIRes.data.attributes.slike.data,
       psi: APIRes.data.attributes.psi,
       macke: APIRes.data.attributes.macke,
+      onama: APIRes.data.attributes.onama,
+      akcije: APIRes.data.attributes.akcije,
     },
     revalidate: 60,
   };

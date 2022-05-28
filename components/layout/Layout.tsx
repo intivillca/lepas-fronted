@@ -6,7 +6,6 @@ import { Footer } from "./Footer/Footer";
 import { Navigation } from "./Header/Navigation";
 import { NavigationBrand } from "./Header/NavigationBrand";
 import { NavigationSocialMediaButtons } from "./Header/NavigationSocialMediaButtons";
-import { UpArrow } from "./UpArrow/UpArrow";
 
 interface LayoutProps {
   children: ReactNode;
@@ -27,15 +26,15 @@ const useLayout = () => {
   const { data, isLoading } = useQuery(["layout"], () => getLayoutData());
   return { data, isLoading };
 };
+
 export const Layout = ({ children }: LayoutProps) => {
   const { data, isLoading } = useLayout();
   const navigation = data?.navigation ?? {};
   const socialMedia = data?.socialmedia ?? {};
-  const footer = data?.footerlinks ?? {};
   const logo = data?.logo ?? {};
   if (isLoading) return <>Loading...</>;
   return (
-    <>
+    <PageWrapper>
       <Navigation
         navigation={navigation}
         brand={<NavigationBrand logo={logo} />}
@@ -44,9 +43,16 @@ export const Layout = ({ children }: LayoutProps) => {
         }
         divider={true}
       />
-      {children}
-      <UpArrow />
+      <PinkBg>{children}</PinkBg>
       <Footer navigation={navigation} socialmedia={socialMedia} />
-    </>
+    </PageWrapper>
   );
 };
+
+const PageWrapper = styled("div", {
+  height: "100vh",
+  margin: 0,
+  display: "flex",
+  flexDirection: "column",
+});
+const PinkBg = styled("div", { backgroundColor: "$pink600" });

@@ -29,6 +29,7 @@ export const Footer = ({ navigation, socialmedia }: FooterProps) => {
   );
 };
 const FooterComponent = styled("footer", {
+  marginTop: "auto",
   width: "$full",
   paddingBottom: "20px",
   textAlign: "center",

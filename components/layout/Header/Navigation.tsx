@@ -1,9 +1,6 @@
-import Link from "next/link";
-import Image from "next/image";
-import { styled } from "../../../stitches.config";
+import { styled, css } from "../../../stitches.config";
 import { NavigationButton } from "./NavigationButton";
-import { NavigationSocialMediaButton } from "./NavigationSocialMediaButton";
-import { SocialMedia, NavigationInterface } from "../../../types/LayoutTypes";
+import { NavigationInterface } from "../../../types/LayoutTypes";
 import { ReactNode } from "react";
 
 export interface NavigationProps {
@@ -19,6 +16,8 @@ export const Navigation = ({
   socialmediabuttons,
   divider = false,
 }: NavigationProps) => {
+  const isMobile = css({ "@bp2": {} });
+  console.log("is mobile:", isMobile);
   return (
     <NavigationHeader>
       <NavigationContainer>

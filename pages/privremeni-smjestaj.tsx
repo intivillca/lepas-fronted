@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import ReactMarkdown from "react-markdown";
-import Image, { ImageProps } from "next/image";
+import Image from "next/image";
 import { getImageAlt, ImageBase, getImageLink } from "../utils/parseImageLink";
 import { fetchAPI } from "../api/api";
 import { styled } from "../stitches.config";

@@ -6,13 +6,9 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin=""
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Grandstander&family=Gochi+Hand&family=Open+Sans&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&family=Numans&family=Pacifico&display=swap"
             rel="stylesheet"
           />
         </Head>

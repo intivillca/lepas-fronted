@@ -20,6 +20,7 @@
     "react-icons": "^4.3.1",
     "react-markdown": "^8.0.3",
     "react-query": "^3.39.0",
+    "react-scroll-up-button": "^1.6.4",
     "react-use": "^17.3.2",
     "rebass": "^4.0.7"
   },

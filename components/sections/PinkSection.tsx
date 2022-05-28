@@ -1,9 +1,17 @@
+import { CSS } from "@stitches/react";
+import { ReactNode } from "react";
 import { styled } from "../../stitches.config";
 
-export const PinkSection = styled("div", {
-  display: "flex",
-  flexDirection: "column",
-  width: "$full",
+type StyleComponentProps = React.ComponentProps<typeof PinkSectionContainer>;
+
+interface PinkSectionProps extends StyleComponentProps {
+  children: ReactNode;
+}
+export const PinkSection = ({ children, ...args }: PinkSectionProps) => {
+  return <PinkSectionContainer {...args}>{children}</PinkSectionContainer>;
+};
+
+const PinkSectionContainer = styled("div", {
   backgroundColor: "$red700",
   backgroundPositionX: "0%",
   backgroundPositionY: "0%",
@@ -15,5 +23,5 @@ export const PinkSection = styled("div", {
   backgroundOrigin: "padding-box",
   backgroundClip: "border-box",
   boxShadow:
-    "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
+    "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
 });
