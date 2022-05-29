@@ -2,7 +2,10 @@ import { styled } from "../../stitches.config";
 
 export const WhiteSection = styled("div", {
   display: "flex",
-  flexDirection: "column",
   width: "$full",
-  backgroundColor: "$white",
+  flexDirection: "column",
+  backgroundColor: "white",
+  alignItems: "center",
+  justifyContent: "center",
+  margin: "0 auto",
 });

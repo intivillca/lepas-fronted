@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import { useQuery } from "react-query";
 import { fetchAPI } from "../../api/api";
 import { styled } from "../../stitches.config";
@@ -6,6 +6,7 @@ import { Footer } from "./Footer/Footer";
 import { Navigation } from "./Header/Navigation";
 import { NavigationBrand } from "./Header/NavigationBrand";
 import { NavigationSocialMediaButtons } from "./Header/NavigationSocialMediaButtons";
+import ScrollToTop from "./ScrollTop";
 
 interface LayoutProps {
   children: ReactNode;
@@ -44,6 +45,7 @@ export const Layout = ({ children }: LayoutProps) => {
         divider={true}
       />
       <PinkBg>{children}</PinkBg>
+      <ScrollToTop />
       <Footer navigation={navigation} socialmedia={socialMedia} />
     </PageWrapper>
   );
@@ -55,4 +57,4 @@ const PageWrapper = styled("div", {
   display: "flex",
   flexDirection: "column",
 });
-const PinkBg = styled("div", { backgroundColor: "$pink600" });
+const PinkBg = styled("div", {});

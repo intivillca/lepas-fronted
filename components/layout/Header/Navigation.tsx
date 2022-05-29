@@ -1,7 +1,12 @@
-import { styled, css } from "../../../stitches.config";
+import { styled } from "../../../stitches.config";
 import { NavigationButton } from "./NavigationButton";
 import { NavigationInterface } from "../../../types/LayoutTypes";
 import { ReactNode } from "react";
+import { useMediaQuery } from "react-responsive";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { useToggle } from "react-use";
+import { keyframes } from "@stitches/react";
+import { NavigationMobileButton } from "./NavigationMobileButton";
 
 export interface NavigationProps {
   navigation: NavigationInterface[];
@@ -16,25 +21,49 @@ export const Navigation = ({
   socialmediabuttons,
   divider = false,
 }: NavigationProps) => {
-  const isMobile = css({ "@bp2": {} });
-  console.log("is mobile:", isMobile);
+  const isMobile = useMediaQuery({ maxWidth: 900 });
+  const [open, setOpen] = useToggle(false);
   return (
     <NavigationHeader>
       <NavigationContainer>
         {brand && brand}
-        <NavigationLinks divider={divider}>
-          <NavigationMenu>
+        {!isMobile && (
+          <NavigationLinks divider={divider}>
+            <NavigationMenu>
+              {navigation.map((item) => (
+                <NavigationButton
+                  buttonText={item.text}
+                  link={item.href}
+                  key={item.id}
+                />
+              ))}
+              {socialmediabuttons && socialmediabuttons}
+            </NavigationMenu>
+          </NavigationLinks>
+        )}
+        {isMobile && (
+          <GiHamburgerMenu
+            size={32}
+            color="pink"
+            onClick={setOpen}
+            style={{ marginRight: "20px" }}
+          />
+        )}
+      </NavigationContainer>
+      {open && isMobile && (
+        <NavigationMobileLinks divider={divider}>
+          <NavigationMobileMenu>
             {navigation.map((item) => (
-              <NavigationButton
+              <NavigationMobileButton
                 buttonText={item.text}
                 link={item.href}
                 key={item.id}
               />
             ))}
             {socialmediabuttons && socialmediabuttons}
-          </NavigationMenu>
-        </NavigationLinks>
-      </NavigationContainer>
+          </NavigationMobileMenu>
+        </NavigationMobileLinks>
+      )}
     </NavigationHeader>
   );
 };
@@ -56,8 +85,10 @@ const NavigationContainer = styled("div", {
   boxSizing: "border-box",
   margin: "0 auto",
   display: "flex",
-  flexDirection: "column",
+  flexDirection: "row",
   alignItems: "center",
+  justifyContent: "space-between",
+  "@bp2": { flexDirection: "column", alignItems: "center" },
 });
 
 const NavigationLinks = styled("div", {
@@ -73,5 +104,32 @@ const NavigationLinks = styled("div", {
 const NavigationMenu = styled("ul", {
   listStyle: "none",
   display: "flex",
+  alignItems: "center",
+});
+
+const fadeIn = keyframes({
+  from: {
+    opacity: 0,
+  },
+  to: {
+    opacity: 1,
+  },
+});
+
+const NavigationMobileLinks = styled("div", {
+  padding: "30px 0",
+  animation: `${fadeIn} ease-in-out 0.6s both`,
+  variants: {
+    divider: {
+      true: { borderTop: "2px solid #e3e3e3" },
+      false: {},
+    },
+  },
+});
+
+const NavigationMobileMenu = styled("ul", {
+  listStyle: "none",
+  display: "flex",
+  flexDirection: "column",
   alignItems: "center",
 });

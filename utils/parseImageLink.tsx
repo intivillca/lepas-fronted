@@ -4,6 +4,7 @@ export interface ImageProps {
   media: ImageBase;
 }
 export interface ImageBase {
+  id: string | number | undefined;
   attributes?: { url: string; alt: string };
   data: {
     attributes: { url: string; alt: string };

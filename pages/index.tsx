@@ -1,14 +1,14 @@
 import type { NextPage } from "next";
 import Image from "next/image";
+import CountUp from "react-countup";
 import { fetchAPI } from "../api/api";
-import {
-  AnimalCard,
-  AnimalCardProps,
-} from "../components/elements/AnimalCard/AnimalCard";
-import { AnimalCardGroup } from "../components/elements/AnimalCardGroup/DogCardGroup";
-import { Carousel } from "../components/elements/Carousel/Carousel";
-import { CursiveHeading } from "../components/elements/CursiveHeading/CursiveHeading";
-import { ItemCard } from "../components/elements/ItemCard/ItemCard";
+import React from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+import { Carousel } from "react-responsive-carousel";
+import { AnimalCard } from "../components/elements/ActionCard/AnimalCard";
+import { BlogCard } from "../components/elements/BlogCard/BlogCard";
+import { BlogCardGroup } from "../components/elements/BlogCard/BlogCardGroup";
 import { PinkSection } from "../components/sections/PinkSection";
 import { PinkWavySection } from "../components/sections/PinkWavySection";
 import { SectionWrapper } from "../components/sections/SectionWrapper";
@@ -19,14 +19,14 @@ import { Pas, PasComponent } from "../types/DataTypes";
 import { getImageAlt, getImageLink, ImageBase } from "../utils/parseImageLink";
 
 interface HomeProps {
-  slike: ImageBase[];
   psi: any;
   macke: any;
   onama: any;
   akcije: any;
+  naslovniSlajdovi: any;
 }
 
-const ParsePsi = (psi: any[]): AnimalCardProps[] => {
+const ParsePsi = (psi: any[]) => {
   const parsedPsi = psi.map((pas) => {
     return [
       {
@@ -41,7 +41,7 @@ const ParsePsi = (psi: any[]): AnimalCardProps[] => {
   return ret;
 };
 
-const ParseMacke = (macke: any[]): AnimalCardProps[] => {
+const ParseMacke = (macke: any[]) => {
   const parsedMacke = macke.map((macka) => {
     return [
       {
@@ -57,35 +57,104 @@ const ParseMacke = (macke: any[]): AnimalCardProps[] => {
 };
 
 const Home: NextPage<HomeProps> = ({
-  slike,
   psi,
   macke,
   onama,
   akcije,
+  naslovniSlajdovi,
 }: HomeProps) => {
-  console.log(akcije);
-  return <></>;
+  console.log(naslovniSlajdovi);
+  return (
+    <>
+      <Carousel autoPlay infiniteLoop showStatus={false} interval={5000}>
+        {naslovniSlajdovi.map((slide: any) => (
+          <HeroWrapper key={slide.id}>
+            <Hero>
+              <HeroTitle>{slide.naslov}</HeroTitle>
+              <p> {slide.text}</p>
+            </Hero>
+            <ImageContainer>
+              <Image
+                objectFit="cover"
+                layout="fill"
+                alt={getImageAlt({ media: slide.slika })}
+                src={getImageLink({ media: slide.slika })}
+              />
+            </ImageContainer>
+          </HeroWrapper>
+        ))}
+      </Carousel>
+      <WhiteSection>
+        <SectionTitle>Kako mozete pomoci?</SectionTitle>
+        <SectionSubtitle></SectionSubtitle>
+        {akcije.map((akcija: any) => (
+          <>
+            <HeroWrapper>
+              <>{akcija.naslov}</>
+              <>{akcija.opis}</>
+            </HeroWrapper>
+          </>
+        ))}
+      </WhiteSection>
+    </>
+  );
 };
+
+const SectionTitle = styled("h1", {
+  color: "$pink700",
+  fontFamily: "'Pacifico', cursive",
+  fontSize: "$xl5",
+  mb: "20px",
+});
+
+const SectionSubtitle = styled("h2", {
+  color: "$black",
+  fontFamily: "'Baloo Tamma 2', cursive",
+  fontSize: "$xl3",
+  mb: "16px",
+});
+
+const HeroTitle = styled("h1", {
+  color: "White",
+  fontFamily: "'Pacifico', cursive",
+  fontSize: "$xl5",
+  mb: "20px",
+});
 
 const ImageContainer = styled("div", {
   position: "relative",
-  aspectRatio: 13 / 16,
-  width: "30%",
-  maxWidth: "$xl2",
+  aspectRatio: 16 / 9,
+  width: "$full",
   height: "auto",
-  objectFit: "cover",
-  border: "10px solid",
-  borderColor: "$pink700",
-  margin: "60px auto",
   FontFamily: "Montserrat",
   padding: "60px",
   overflow: "hidden",
 });
 
+const Hero = styled("div", {
+  backgroundColor: "$pink700",
+  margin: "0px",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  backgroundImage:
+    "url(http://demo.mage-themes.com/template/paws/paws/images/paw_pattern.png)",
+});
+
+const HeroWrapper = styled("div", {
+  display: "grid",
+  gridTemplateColumns: "1fr",
+  "@bp2": { gridTemplateColumns: "1fr 1fr" },
+  justifyContent: "stretch",
+  gridAutoRows: "1fr",
+});
 export async function getStaticProps() {
   const APIRes = await fetchAPI("/o-nama", {
     populate: {
       slike: "*",
+      naslovniSlajdovi: {
+        populate: "*",
+      },
       onama: {
         populate: "*",
       },
@@ -110,7 +179,7 @@ export async function getStaticProps() {
   });
   return {
     props: {
-      slike: APIRes.data.attributes.slike.data,
+      naslovniSlajdovi: APIRes.data.attributes.naslovniSlajdovi,
       psi: APIRes.data.attributes.psi,
       macke: APIRes.data.attributes.macke,
       onama: APIRes.data.attributes.onama,

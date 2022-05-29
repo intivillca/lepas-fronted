@@ -1,14 +1,13 @@
 import type { NextPage } from "next";
 import { fetchAPI } from "../../api/api";
-import { AnimalCardProps } from "../../components/elements/AnimalCard/AnimalCard";
-import { AnimalCardGroup } from "../../components/elements/AnimalCardGroup/DogCardGroup";
+
 import { PinkSection } from "../../components/sections/PinkSection";
 
 interface MackeProps {
   data: any[];
   meta: {};
 }
-const ParseMacke = (macke: any[]): AnimalCardProps[] => {
+const ParseMacke = (macke: any[]) => {
   const parsedMacke = macke.map((macka) => {
     return [
       {
@@ -26,7 +25,7 @@ const Macke: NextPage<MackeProps> = ({ data, meta }: MackeProps) => {
   console.log(data, meta);
   return (
     <PinkSection>
-      <AnimalCardGroup animals={ParseMacke(data)} />
+      <></>
     </PinkSection>
   );
 };
