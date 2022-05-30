@@ -127,6 +127,7 @@ table {
 .markup {
   text-align: center;
   font-family: "Open Sans", sans-serif;
+  font-size: x-large;
 }
 .markup h1 {
   color: white;
@@ -135,7 +136,7 @@ table {
   font-size: x-large;
 }
 .markup p {
-  margin: 20px 0px;
+  margin: 40px 0px;
   font-family: "Open Sans", sans-serif;
 }
 .markup h2 {

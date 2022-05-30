@@ -1,22 +1,18 @@
 import type { NextPage } from "next";
-import Image from "next/image";
-import CountUp from "react-countup";
 import { fetchAPI } from "../api/api";
 import React from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-
-import { Carousel } from "react-responsive-carousel";
-import { AnimalCard } from "../components/elements/ActionCard/AnimalCard";
-import { BlogCard } from "../components/elements/BlogCard/BlogCard";
-import { BlogCardGroup } from "../components/elements/BlogCard/BlogCardGroup";
-import { PinkSection } from "../components/sections/PinkSection";
-import { PinkWavySection } from "../components/sections/PinkWavySection";
-import { SectionWrapper } from "../components/sections/SectionWrapper";
-import { TextSection } from "../components/sections/TextSection";
-import { WhiteSection } from "../components/sections/WhiteSection";
+import VisibilitySensor from "react-visibility-sensor";
+import { Heading } from "../components/typograpghy/Heading";
+import { SubHeading } from "../components/typograpghy/SubHeading";
+import { Section } from "../components/sections/Section";
+import { CarouselHero } from "../components/elements/CarouselHero/CarouselHero";
+import { ActionCards } from "../components/elements/ActionCard/ActionCards";
+import { AnimalCard } from "../components/elements/AnimalCard/AnimalCard";
 import { styled } from "../stitches.config";
-import { Pas, PasComponent } from "../types/DataTypes";
-import { getImageAlt, getImageLink, ImageBase } from "../utils/parseImageLink";
+import { Donations } from "../components/elements/Donations/Donations";
+import { Features } from "../components/elements/Features/Features";
+import { Card, Collapse, Text } from "@nextui-org/react";
+import CountUp from "react-countup";
 
 interface HomeProps {
   psi: any;
@@ -26,7 +22,7 @@ interface HomeProps {
   naslovniSlajdovi: any;
 }
 
-const ParsePsi = (psi: any[]) => {
+const ParsePsi = (psi: any[]): any[] => {
   const parsedPsi = psi.map((pas) => {
     return [
       {
@@ -41,7 +37,7 @@ const ParsePsi = (psi: any[]) => {
   return ret;
 };
 
-const ParseMacke = (macke: any[]) => {
+const ParseMacke = (macke: any[]): any[] => {
   const parsedMacke = macke.map((macka) => {
     return [
       {
@@ -57,105 +53,109 @@ const ParseMacke = (macke: any[]) => {
 };
 
 const Home: NextPage<HomeProps> = ({
+  akcije,
+  naslovniSlajdovi,
   psi,
   macke,
   onama,
-  akcije,
-  naslovniSlajdovi,
 }: HomeProps) => {
-  console.log(naslovniSlajdovi);
+  console.log(onama);
+  console.log(macke.macka.data);
   return (
     <>
-      <Carousel autoPlay infiniteLoop showStatus={false} interval={5000}>
-        {naslovniSlajdovi.map((slide: any) => (
-          <HeroWrapper key={slide.id}>
-            <Hero>
-              <HeroTitle>{slide.naslov}</HeroTitle>
-              <p> {slide.text}</p>
-            </Hero>
-            <ImageContainer>
-              <Image
-                objectFit="cover"
-                layout="fill"
-                alt={getImageAlt({ media: slide.slika })}
-                src={getImageLink({ media: slide.slika })}
-              />
-            </ImageContainer>
-          </HeroWrapper>
-        ))}
-      </Carousel>
-      <WhiteSection>
-        <SectionTitle>Kako mozete pomoci?</SectionTitle>
-        <SectionSubtitle></SectionSubtitle>
-        {akcije.map((akcija: any) => (
-          <>
-            <HeroWrapper>
-              <>{akcija.naslov}</>
-              <>{akcija.opis}</>
-            </HeroWrapper>
-          </>
-        ))}
-      </WhiteSection>
+      <Section sectionColor="pink">
+        <CarouselHero naslovniSlajdovi={naslovniSlajdovi} />
+      </Section>
+
+      <Section
+        sectionColor="white"
+        style={{
+          padding: "0 4rem",
+          width: "auto",
+          margin: "2.25rem 0",
+        }}
+      >
+        <Heading heading="h2" variant="pink" style={{ mb: "2rem" }}>
+          Kako mozete pomoci?
+        </Heading>
+        <SubHeading
+          heading={"h3"}
+          variant={"black"}
+          style={{ marginBottom: "2rem" }}
+        >
+          In ad deserunt sit ut. Do duis voluptate ea cillum. Duis irure dolor
+          excepteur anim magna mollit. Tempor non magna qui nostrud elit mollit
+        </SubHeading>
+        <ActionCards akcije={akcije} />
+      </Section>
+
+      <Section sectionColor={"pink"}>
+        <Heading heading="h2" variant="white" style={{ mb: "2rem" }}>
+          {psi.naslov}
+        </Heading>
+        <SubHeading
+          heading={"h3"}
+          variant={"black"}
+          style={{ marginBottom: "2.25rem" }}
+        >
+          {psi.tekst}
+        </SubHeading>
+        <AnimalCardGroup>
+          {ParsePsi(psi.pas.data).map((pas, idx) => (
+            <AnimalCard
+              key={idx}
+              ime={pas.ime}
+              slika={pas.slika}
+              slug={pas.slug}
+              path={"psi"}
+            />
+          ))}
+        </AnimalCardGroup>
+      </Section>
+
+      <Section sectionColor={"white"}>
+        <Heading heading="h2" variant="pink" style={{ mb: "2rem" }}>
+          {macke.naslov}
+        </Heading>
+        <SubHeading
+          heading={"h3"}
+          variant={"black"}
+          style={{ marginBottom: "2rem" }}
+        >
+          {macke.tekst}
+        </SubHeading>
+        <AnimalCardGroup>
+          {ParseMacke(macke.macka.data).map((macka, idx) => (
+            <AnimalCard
+              key={idx}
+              ime={macka.ime}
+              slika={macka.slika}
+              slug={macka.slug}
+              path={"macke"}
+            />
+          ))}
+        </AnimalCardGroup>
+      </Section>
     </>
   );
 };
 
-const SectionTitle = styled("h1", {
-  color: "$pink700",
-  fontFamily: "'Pacifico', cursive",
-  fontSize: "$xl5",
-  mb: "20px",
-});
-
-const SectionSubtitle = styled("h2", {
-  color: "$black",
-  fontFamily: "'Baloo Tamma 2', cursive",
-  fontSize: "$xl3",
-  mb: "16px",
-});
-
-const HeroTitle = styled("h1", {
-  color: "White",
-  fontFamily: "'Pacifico', cursive",
-  fontSize: "$xl5",
-  mb: "20px",
-});
-
-const ImageContainer = styled("div", {
-  position: "relative",
-  aspectRatio: 16 / 9,
-  width: "$full",
-  height: "auto",
-  FontFamily: "Montserrat",
-  padding: "60px",
-  overflow: "hidden",
-});
-
-const Hero = styled("div", {
-  backgroundColor: "$pink700",
-  margin: "0px",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  backgroundImage:
-    "url(http://demo.mage-themes.com/template/paws/paws/images/paw_pattern.png)",
-});
-
-const HeroWrapper = styled("div", {
+const AnimalCardGroup = styled("div", {
+  width: "70%",
   display: "grid",
+  gridGap: "$8",
   gridTemplateColumns: "1fr",
-  "@bp2": { gridTemplateColumns: "1fr 1fr" },
-  justifyContent: "stretch",
-  gridAutoRows: "1fr",
+  marginBottom: "$12",
+  "@bp2": {
+    gridTemplateColumns: "repeat(2, 1fr)",
+    width: "50%",
+  },
 });
 export async function getStaticProps() {
   const APIRes = await fetchAPI("/o-nama", {
     populate: {
       slike: "*",
       naslovniSlajdovi: {
-        populate: "*",
-      },
-      onama: {
         populate: "*",
       },
       akcije: {
@@ -182,7 +182,6 @@ export async function getStaticProps() {
       naslovniSlajdovi: APIRes.data.attributes.naslovniSlajdovi,
       psi: APIRes.data.attributes.psi,
       macke: APIRes.data.attributes.macke,
-      onama: APIRes.data.attributes.onama,
       akcije: APIRes.data.attributes.akcije,
     },
     revalidate: 60,

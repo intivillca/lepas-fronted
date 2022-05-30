@@ -44,7 +44,7 @@ export const Layout = ({ children }: LayoutProps) => {
         }
         divider={true}
       />
-      <PinkBg>{children}</PinkBg>
+      <BgFix>{children}</BgFix>
       <ScrollToTop />
       <Footer navigation={navigation} socialmedia={socialMedia} />
     </PageWrapper>
@@ -56,5 +56,6 @@ const PageWrapper = styled("div", {
   margin: 0,
   display: "flex",
   flexDirection: "column",
+  overflowX: "hidden",
 });
-const PinkBg = styled("div", {});
+const BgFix = styled("div", { marginTop: "-16px" });

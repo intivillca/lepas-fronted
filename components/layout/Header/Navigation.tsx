@@ -4,6 +4,8 @@ import { NavigationInterface } from "../../../types/LayoutTypes";
 import { ReactNode } from "react";
 import { useMediaQuery } from "react-responsive";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { MdClose } from "react-icons/md";
+
 import { useToggle } from "react-use";
 import { keyframes } from "@stitches/react";
 import { NavigationMobileButton } from "./NavigationMobileButton";
@@ -25,51 +27,70 @@ export const Navigation = ({
   const [open, setOpen] = useToggle(false);
   return (
     <NavigationHeader>
-      <NavigationContainer>
-        {brand && brand}
-        {!isMobile && (
-          <NavigationLinks divider={divider}>
-            <NavigationMenu>
+      <NavigationBackground>
+        <NavigationContainer>
+          {brand && brand}
+          {!isMobile && (
+            <NavigationLinks divider={divider}>
+              <NavigationMenu>
+                {navigation.map((item) => (
+                  <NavigationButton
+                    buttonText={item.text}
+                    link={item.href}
+                    key={item.id}
+                  />
+                ))}
+                {socialmediabuttons && socialmediabuttons}
+              </NavigationMenu>
+            </NavigationLinks>
+          )}
+          {isMobile && !open && (
+            <GiHamburgerMenu
+              size={32}
+              color="pink"
+              onClick={setOpen}
+              style={{ marginRight: "20px" }}
+            />
+          )}
+          {isMobile && open && (
+            <MdClose
+              size={32}
+              color="pink"
+              onClick={setOpen}
+              style={{ marginRight: "20px" }}
+            />
+          )}
+        </NavigationContainer>
+        {open && isMobile && (
+          <NavigationMobileLinks divider={divider}>
+            <NavigationMobileMenu>
               {navigation.map((item) => (
-                <NavigationButton
+                <NavigationMobileButton
                   buttonText={item.text}
                   link={item.href}
                   key={item.id}
                 />
               ))}
               {socialmediabuttons && socialmediabuttons}
-            </NavigationMenu>
-          </NavigationLinks>
+            </NavigationMobileMenu>
+          </NavigationMobileLinks>
         )}
-        {isMobile && (
-          <GiHamburgerMenu
-            size={32}
-            color="pink"
-            onClick={setOpen}
-            style={{ marginRight: "20px" }}
-          />
-        )}
-      </NavigationContainer>
-      {open && isMobile && (
-        <NavigationMobileLinks divider={divider}>
-          <NavigationMobileMenu>
-            {navigation.map((item) => (
-              <NavigationMobileButton
-                buttonText={item.text}
-                link={item.href}
-                key={item.id}
-              />
-            ))}
-            {socialmediabuttons && socialmediabuttons}
-          </NavigationMobileMenu>
-        </NavigationMobileLinks>
-      )}
+      </NavigationBackground>
     </NavigationHeader>
   );
 };
+const NavigationBackground = styled("div", {
+  width: "100%",
+  backgroundColor: "white",
+});
 const NavigationHeader = styled("header", {
   zIndex: "2",
   textAlign: "center",
+  position: "sticky",
+  paddingBottom: "16px",
+  top: "0",
+  background:
+    "url(http://demo.mage-themes.com/template/paws/paws/images/halfcircle_pattern.png) center bottom repeat-x",
   "&::after": {
     clear: "both",
     content: ".",
@@ -88,6 +109,7 @@ const NavigationContainer = styled("div", {
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "space-between",
+  backgroundColor: "White",
   "@bp2": { flexDirection: "column", alignItems: "center" },
 });
 

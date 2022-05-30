@@ -4,7 +4,7 @@ import Image from "next/image";
 import { getImageAlt, ImageBase, getImageLink } from "../utils/parseImageLink";
 import { fetchAPI } from "../api/api";
 import { styled } from "../stitches.config";
-import { PinkSection } from "../components/sections/PinkSection";
+import { Section } from "../components/sections/Section";
 interface PrivremeniSmjestajProps {
   clanak: string;
   slika: ImageBase;
@@ -16,7 +16,7 @@ const PrivremeniSmjestaj: NextPage<PrivremeniSmjestajProps> = ({
 }: PrivremeniSmjestajProps) => {
   console.log(slika);
   return (
-    <PinkSection>
+    <Section sectionColor={"pink"}>
       <Wrapper>
         <ReactMarkdown className="markup">{clanak}</ReactMarkdown>
         <div
@@ -33,7 +33,7 @@ const PrivremeniSmjestaj: NextPage<PrivremeniSmjestajProps> = ({
           />
         </div>
       </Wrapper>
-    </PinkSection>
+    </Section>
   );
 };
 

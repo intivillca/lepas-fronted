@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import { fetchAPI } from "../../api/api";
-import { WhiteSection } from "../../components/sections/WhiteSection";
 import { ImageBase } from "../../utils/parseImageLink";
 
 interface Pas {
@@ -17,7 +16,7 @@ interface PsiProps {
 
 const Psi: NextPage<PsiProps> = ({ psi, meta }: PsiProps) => {
   console.log(psi);
-  return <WhiteSection></WhiteSection>;
+  return <></>;
 };
 
 export async function getStaticProps() {

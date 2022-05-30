@@ -1,6 +1,10 @@
+import { Pagination } from "@nextui-org/react";
 import type { NextPage } from "next";
 import { fetchAPI } from "../../api/api";
-import { PinkSection } from "../../components/sections/PinkSection";
+import { AnimalCard } from "../../components/elements/AnimalCard/AnimalCard";
+import { PageHeading } from "../../components/elements/PageHeading/PageHeading";
+import { Section } from "../../components/sections/Section";
+import { styled } from "../../stitches.config";
 import { ImageBase } from "../../utils/parseImageLink";
 
 interface Pas {
@@ -12,7 +16,8 @@ interface Pas {
 }
 interface PsiProps {
   psi: Pas[];
-  meta: {};
+  stranica: any;
+  meta: any;
 }
 const ParsePsi = (psi: Pas[]) => {
   const parsedPsi = psi.map((pas) => {
@@ -29,11 +34,48 @@ const ParsePsi = (psi: Pas[]) => {
   return ret;
 };
 
-const Psi: NextPage<PsiProps> = ({ psi, meta }: PsiProps) => {
+const Psi: NextPage<PsiProps> = ({ psi, meta, stranica }: PsiProps) => {
+  console.log(stranica);
+  console.log(psi);
+  console.log(meta);
+
+  const AnimalCardGroup = styled("div", {
+    width: "80%",
+    display: "grid",
+    gridGap: "$4",
+    gridTemplateColumns: "1fr",
+    padding: "0px 20px",
+    "@bp2": {
+      gridTemplateColumns:
+        psi.length > 4 ? "repeat(4, 1fr)" : `repeat(${psi.length}, 1fr)`,
+    },
+  });
+
   return (
-    <PinkSection>
-      <></>
-    </PinkSection>
+    <>
+      <PageHeading
+        title={stranica.attributes.zaglavlje.naslov}
+        image={stranica.attributes.zaglavlje.slika}
+      />
+      <Section
+        sectionColor={"white"}
+        style={{
+          margin: "4rem 0rem",
+        }}
+      >
+        <AnimalCardGroup>
+          {ParsePsi(psi).map((pas, idx) => (
+            <AnimalCard
+              key={idx}
+              ime={pas.ime}
+              slika={pas.slika}
+              slug={pas.slug}
+              path={"psi"}
+            />
+          ))}
+        </AnimalCardGroup>
+      </Section>
+    </>
   );
 };
 
@@ -41,10 +83,18 @@ export async function getStaticProps() {
   const APIRes = await fetchAPI("/psi", {
     populate: "*",
   });
+  const elementiStr = await fetchAPI("/udomi-psa", {
+    populate: {
+      zaglavlje: {
+        populate: "*",
+      },
+    },
+  });
   return {
     props: {
       psi: APIRes.data,
       meta: APIRes.meta,
+      stranica: elementiStr.data,
     },
     revalidate: 60,
   };
