@@ -139,6 +139,9 @@ table {
   margin: 40px 0px;
   font-family: "Open Sans", sans-serif;
 }
+.markup strong {
+  font-weight: 600;
+}
 .markup h2 {
   color: white;
   font-family: "Grandstander", cursive;

@@ -16,7 +16,7 @@ const PrivremeniSmjestaj: NextPage<PrivremeniSmjestajProps> = ({
 }: PrivremeniSmjestajProps) => {
   console.log(slika);
   return (
-    <Section sectionColor={"pink"}>
+    <Section sectionColor={"pink"} style={{ padding: "20px" }}>
       <Wrapper>
         <ReactMarkdown className="markup">{clanak}</ReactMarkdown>
         <div
@@ -25,13 +25,7 @@ const PrivremeniSmjestaj: NextPage<PrivremeniSmjestajProps> = ({
             height: "100px",
             position: "relative",
           }}
-        >
-          <Image
-            alt={getImageAlt({ media: slika })}
-            src={getImageLink({ media: slika })}
-            layout="fill"
-          />
-        </div>
+        ></div>
       </Wrapper>
     </Section>
   );

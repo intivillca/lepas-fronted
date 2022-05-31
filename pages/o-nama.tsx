@@ -30,7 +30,6 @@ const ONama: NextPage<Props> = ({
   faq,
   faqPozadina,
 }) => {
-  console.log(zaglavljeFAQ, zaglavljeONama, zaglavljeStatistika);
   return (
     <>
       <PageHeading title={zaglavlje.naslov} image={zaglavlje.slika} />
@@ -42,6 +41,12 @@ const ONama: NextPage<Props> = ({
           marginBottom: "2.25rem 0",
         }}
       >
+        <Heading heading="h2" variant="pink" style={{ marginTop: "32px" }}>
+          {zaglavljeONama.naslov}
+        </Heading>
+        <SubHeading heading="h2" variant="black">
+          {zaglavljeONama.tekst}
+        </SubHeading>
         <Features features={onama} />
       </Section>
       <Section
@@ -52,7 +57,7 @@ const ONama: NextPage<Props> = ({
           marginBottom: "2.25rem 0",
         }}
       >
-        <Heading heading="h2" variant="white">
+        <Heading heading="h2" variant="white" style={{ marginTop: "32px" }}>
           {zaglavljeStatistika.naslov}
         </Heading>
         <SubHeading heading="h2" variant="white">
@@ -84,9 +89,19 @@ const ONama: NextPage<Props> = ({
       <Section
         sectionColor={"image"}
         bgImageUrl={faqPozadina}
-        style={{ padding: "2rem 0" }}
+        style={{
+          padding: "0 2rem",
+          width: "auto",
+        }}
       >
-        <Heading heading="h2" variant="black">
+        <Heading
+          heading="h2"
+          variant="black"
+          style={{
+            marginTop: "2.25rem",
+            marginBottom: "2.25rem",
+          }}
+        >
           {zaglavljeFAQ.naslov}
         </Heading>
         <SubHeading

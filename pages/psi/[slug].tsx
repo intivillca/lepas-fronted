@@ -1,37 +1,54 @@
 import type { NextPage } from "next";
 import { fetchAPI } from "../../api/api";
+import { AnimalPage } from "../../components/elements/AnimalPage/AnimalPage";
 import { ImageBase } from "../../utils/parseImageLink";
+import Page404 from "../404";
 
-interface Pas {
-  attributes: {
-    ime: string;
-    slika: ImageBase;
-    slug: string;
-  };
-}
-interface PsiProps {
-  psi: Pas[];
-  meta: {};
+interface Props {
+  data: any;
+  meta: any;
 }
 
-const Psi: NextPage<PsiProps> = ({ psi, meta }: PsiProps) => {
-  console.log(psi);
-  return <></>;
+const Psi: NextPage<Props> = ({ data }: Props) => {
+  return (
+    <>
+      <AnimalPage
+        naslov={data[0].attributes.ime}
+        text={data[0].attributes.opis}
+        slika={data[0].attributes.slika}
+        kategorija={data[0].attributes.kategorija}
+      />
+    </>
+  );
 };
-
-export async function getStaticProps() {
-  return {
-    props: {},
-    revalidate: 60,
-  };
-}
 
 export async function getStaticPaths() {
   const res = await fetchAPI("/psi", { populate: "*" });
-
+  const paths = res.data.map((pas: any) => `/psi${pas.attributes.slug}`);
+  console.log(paths);
   return {
-    paths: res.data.map((pas: Pas) => `/psi${pas.attributes.slug}`) || [],
+    paths: [...paths] || [],
     fallback: true,
   };
 }
 export default Psi;
+
+interface GSProps {
+  params: any;
+}
+export async function getStaticProps({
+  params,
+}: GSProps): Promise<{ props: {}; revalidate: number }> {
+  console.log(params);
+  const APIRes = await fetchAPI("/psi", {
+    populate: "*",
+    filters: {
+      slug: `/${params.slug}`,
+    },
+  });
+  console.log(APIRes);
+  return {
+    props: { data: APIRes.data },
+    revalidate: 60,
+  };
+}
