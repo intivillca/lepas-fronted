@@ -16,16 +16,9 @@ const PrivremeniSmjestaj: NextPage<PrivremeniSmjestajProps> = ({
 }: PrivremeniSmjestajProps) => {
   console.log(slika);
   return (
-    <Section sectionColor={"pink"} style={{ padding: "20px" }}>
+    <Section sectionColor={"pink"} >
       <Wrapper>
         <ReactMarkdown className="markup">{clanak}</ReactMarkdown>
-        <div
-          style={{
-            width: "200px",
-            height: "100px",
-            position: "relative",
-          }}
-        ></div>
       </Wrapper>
     </Section>
   );
@@ -49,6 +42,10 @@ export async function getStaticProps() {
 const Wrapper = styled("div", {
   maxWidth: "$xl5",
   margin: "0 auto",
-  padding: "30px",
+  padding: "20px",
+  minHeight: '70vh',
+  "@bp2": {
+    gridTemplateColumns: "repeat(4, 1fr)",
+  },
 });
 export default PrivremeniSmjestaj;

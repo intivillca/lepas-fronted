@@ -137,7 +137,6 @@ const FormContainer = styled("div", {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  margin: "32px 0",
 });
 const ImageContainer = styled("div", {
   overflow: "hidden",
@@ -145,11 +144,12 @@ const ImageContainer = styled("div", {
   color: "white",
 });
 const Flex = styled("div", {
-  display: "flex",
+  display: "none",
   alignItems: "center",
   backgroundColor: "White",
-
-  padding: "0 32px",
+  '@bp2': {
+    display: 'flex',
+  }
 });
 
 const ImageBackground = styled("div", {
@@ -157,8 +157,8 @@ const ImageBackground = styled("div", {
   alignItems: "center",
   justifyContent: "center",
   color: "$pink600",
-  padding: "$4",
   aspectRatio: 1,
+  padding: '$4',
   backgroundColor: "$pink500",
   borderRadius: "50%",
 });

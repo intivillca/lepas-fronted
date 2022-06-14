@@ -141,6 +141,7 @@ const DonationWrapper = styled("div", {
   alignItems: "center",
   gridAutoRows: "1fr",
   padding: "16px",
+  width: '$full'
 });
 
 const ImageContainer = styled("div", {

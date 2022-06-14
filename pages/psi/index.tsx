@@ -35,9 +35,6 @@ const ParsePsi = (psi: Pas[]) => {
 };
 
 const Psi: NextPage<PsiProps> = ({ psi, meta, stranica }: PsiProps) => {
-  console.log(stranica);
-  console.log(psi);
-  console.log(meta);
 
   const AnimalCardGroup = styled("div", {
     width: "80%",
@@ -46,10 +43,10 @@ const Psi: NextPage<PsiProps> = ({ psi, meta, stranica }: PsiProps) => {
     gridTemplateColumns: "1fr",
     padding: "0px 20px",
     "@bp2": {
-      gridTemplateColumns:
-        psi.length > 4 ? "repeat(4, 1fr)" : `repeat(${psi.length}, 1fr)`,
+      gridTemplateColumns: "repeat(4, 1fr)",
     },
   });
+
 
   return (
     <>
