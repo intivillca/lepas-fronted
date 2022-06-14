@@ -14,7 +14,6 @@ interface DonacijeProps {
   donacije: any;
 }
 const Donacije: NextPage<DonacijeProps> = ({ slika, zaglavlje, donacije }) => {
-  console.log(slika);
   return (
     <>
       <PageHeading title={zaglavlje.naslov} image={zaglavlje.slika} />
