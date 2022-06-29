@@ -70,7 +70,7 @@ const DogMobileName = styled("div", {
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "$pink600",
+  backgroundColor: "$blue600",
   padding: "$4",
   borderRadius: "0 0 2rem 2rem ",
 });
@@ -93,18 +93,20 @@ const Overlay = styled("div", {
   justifyContent: "center",
   opacity: 0,
   bottom: "0",
-  background: "rgba(242, 124, 134, 0.8)",
-  color: "#f1f1f1",
+  background: "rgba(103, 128, 221, 0.8)",
+  color: "#f4f5f8",
   width: "100%",
   height: "100%",
   fontSize: "20px",
   textAlign: "center",
-  "&:hover": {
-    opacity: 1,
+  "@bp2": {
+    "&:hover": {
+      opacity: 1,
+    },
   },
 });
 const ImageOutline = styled("div", {
   "@bp2": { padding: "16px" },
-  backgroundColor: "$pink600",
+  backgroundColor: "$blue600",
   borderRadius: "50%",
 });

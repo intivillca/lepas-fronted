@@ -30,7 +30,12 @@ const LogoBox = styled("div", {
   height: "5.75rem",
   "@bp2": {
     width: "8rem",
-    height: "8rem",
+    height: "6rem",
   },
 });
-const NavigationBrandContainer = styled("div", {});
+const NavigationBrandContainer = styled("div", {
+  ml: "0.5rem",
+  "@bp2": {
+    ml: "0",
+  },
+});

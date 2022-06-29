@@ -25,7 +25,7 @@ export const SubHeading = ({ heading, variant, children, ...style }: Props) => {
     variants: {
       fontColor: {
         pink: {
-          color: "$pink700",
+          color: "$blue700",
         },
         white: {
           color: "White",

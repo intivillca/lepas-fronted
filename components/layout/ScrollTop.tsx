@@ -64,7 +64,7 @@ const ScrollTop = styled("div", {
   width: "32px",
   height: "32px",
   p: "2px",
-  color: "$pink900",
+  color: "$blue900",
   position: "fixed",
   bottom: "2rem",
   right: "2rem",

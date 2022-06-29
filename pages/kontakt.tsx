@@ -17,12 +17,14 @@ import { SubHeading } from "../components/typograpghy/SubHeading";
 
 interface Props {
   zaglavlje: any;
+  data: any;
 }
-const Kontakt: NextPage<Props> = ({ zaglavlje }) => {
+const Kontakt: NextPage<Props> = ({ zaglavlje, data }) => {
+  console.log(data);
   return (
     <>
       <PageHeading title={zaglavlje.naslov} image={zaglavlje.slika} />
-      <Section sectionColor={"pink"}>
+      <Section sectionColor={"pink"} noPadding={true}>
         <ContactWrapper>
           <FormContainer>
             <Input
@@ -79,7 +81,7 @@ const Kontakt: NextPage<Props> = ({ zaglavlje }) => {
                 Telefon
               </Heading>
               <SubHeading heading={"h1"} variant={"black"}>
-                0981397298
+                {data.Telefon}
               </SubHeading>
             </Flex>
             <Flex>
@@ -93,7 +95,7 @@ const Kontakt: NextPage<Props> = ({ zaglavlje }) => {
                 Mail
               </Heading>
               <SubHeading heading={"h1"} variant={"black"}>
-                udruga@lepas.hr
+                {data.Mail}
               </SubHeading>
             </Flex>
             <Flex>
@@ -107,7 +109,7 @@ const Kontakt: NextPage<Props> = ({ zaglavlje }) => {
                 Adresa
               </Heading>
               <SubHeading heading={"h1"} variant={"black"}>
-                Odranska ul. 25, 10000, Hrašće Turopoljsko
+                {data.Adresa}{" "}
               </SubHeading>
             </Flex>
           </Container>
@@ -117,13 +119,13 @@ const Kontakt: NextPage<Props> = ({ zaglavlje }) => {
           loading="lazy"
           allowFullScreen
           referrerPolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBsCixq1Git6963h8VjLnWlYEzCmScA8yo
-    &q=Odranska+ul.+25,+10000,+Hrašće+Turopoljsko"
+          src={data.mapLink}
         ></iframe>
       </Section>
     </>
   );
 };
+
 const ContactWrapper = styled("div", {
   display: "grid",
 
@@ -147,19 +149,19 @@ const Flex = styled("div", {
   display: "none",
   alignItems: "center",
   backgroundColor: "White",
-  '@bp2': {
-    display: 'flex',
-  }
+  "@bp2": {
+    display: "flex",
+  },
 });
 
 const ImageBackground = styled("div", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color: "$pink600",
+  color: "$blue600",
   aspectRatio: 1,
-  padding: '$4',
-  backgroundColor: "$pink500",
+  padding: "$4",
+  backgroundColor: "$blue500",
   borderRadius: "50%",
 });
 
@@ -169,11 +171,16 @@ export async function getStaticProps() {
       zaglavlje: {
         populate: "*",
       },
+      mapLink: "*",
+      Mail: "*",
+      Adresa: "*",
+      Telefon: "*",
     },
   });
   return {
     props: {
       zaglavlje: APIRes.data.attributes.zaglavlje,
+      data: APIRes.data.attributes,
     },
     revalidate: 60,
   };

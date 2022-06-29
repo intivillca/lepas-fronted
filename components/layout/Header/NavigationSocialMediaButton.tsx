@@ -47,6 +47,6 @@ const ListLink = styled("a", {
   transition: "all 0.2s ease-in-out",
   cursor: "pointer",
   "&:hover": {
-    color: "$pink800",
+    color: "$blue800",
   },
 });

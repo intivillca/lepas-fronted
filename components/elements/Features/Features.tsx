@@ -105,6 +105,6 @@ const ImageContainer = styled("section", {
 
 const ImageBackground = styled("div", {
   width: "$full",
-  backgroundColor: "$pink600",
+  backgroundColor: "$blue600",
   "@bp2": { borderRadius: "25% 0", padding: "8px 0px", width: "30%" },
 });

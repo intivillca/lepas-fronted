@@ -59,11 +59,9 @@ const Home: NextPage<HomeProps> = ({
   macke,
   onama,
 }: HomeProps) => {
-  console.log(onama);
-  console.log(macke.macka.data);
   return (
     <>
-      <Section sectionColor="pink">
+      <Section sectionColor="pink" noPadding={true}>
         <CarouselHero naslovniSlajdovi={naslovniSlajdovi} />
       </Section>
 

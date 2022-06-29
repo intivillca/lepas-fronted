@@ -111,38 +111,33 @@ const ONama: NextPage<Props> = ({
         >
           {zaglavljeFAQ.tekst}
         </SubHeading>
-        <Section
-          sectionColor="white"
-          style={{
-            marginTop: "2.25rem",
-            width: "70%",
-            marginBottom: "2.25rem",
-          }}
+
+        <Collapse.Group
+          shadow
+          style={{ width: "70%", marginBottom: "2rem", marginTop: "2rem" }}
         >
-          <Collapse.Group shadow>
-            {faq.map((pitanje: any) => (
-              <Collapse
-                title={
-                  <SubHeading heading={"h2"} variant={"black"}>
-                    {pitanje.pitanje}
-                  </SubHeading>
-                }
-                key={pitanje.id}
-              >
-                <Text>{pitanje.odgovor}</Text>
-              </Collapse>
-            ))}
-          </Collapse.Group>
-        </Section>
+          {faq.map((pitanje: any) => (
+            <Collapse
+              title={
+                <SubHeading heading={"h2"} variant={"black"}>
+                  {pitanje.pitanje}
+                </SubHeading>
+              }
+              key={pitanje.id}
+            >
+              <Text>{pitanje.odgovor}</Text>
+            </Collapse>
+          ))}
+        </Collapse.Group>
       </Section>
     </>
   );
 };
 const StatCardWrapper = styled("div", {
-  display: "flex",
+  display: "grid",
   padding: "8px",
-  flexDirection: "column",
-  "@bp2": { width: "50%", flexDirection: "row" },
+  gridTemplateColumns: "1fr",
+  "@bp2": { gridTemplateColumns: "1fr 1fr 1fr" },
   gridGap: "2rem",
   margin: "2rem 0",
 });

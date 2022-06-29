@@ -48,12 +48,14 @@ const Hero = styled("div", {
   },
   flexDirection: "column",
   textAlign: "center",
+  pt: "20px",
 });
 
 const HeroWrapper = styled("div", {
   display: "grid",
   gridTemplateColumns: "1fr",
   gridGap: "$32",
+
   "@bp2": { gridTemplateColumns: "1fr 1fr" },
   justifyContent: "stretch",
 });

@@ -105,7 +105,7 @@ export const Donations = ({ donations }: Props) => {
 };
 const ArrowContainer = styled("div", {
   color: "White",
-  backgroundColor: "$pink600",
+  backgroundColor: "$blue600",
   borderRadius: "50%",
   padding: "$3",
   position: "absolute",
@@ -118,7 +118,7 @@ const ArrowContainer = styled("div", {
       right: { right: "32px", rotate: "90deg" },
     },
   },
-  "&:hover": { backgroundColor: "white", color: "$pink600", scale: "0.9" },
+  "&:hover": { backgroundColor: "white", color: "$blue600", scale: "0.9" },
 });
 const DonationContent = styled("div", {
   backgroundColor: "none",
@@ -141,7 +141,7 @@ const DonationWrapper = styled("div", {
   alignItems: "center",
   gridAutoRows: "1fr",
   padding: "16px",
-  width: '$full'
+  width: "$full",
 });
 
 const ImageContainer = styled("div", {
@@ -157,6 +157,6 @@ const ImageBackground = styled("div", {
   width: "50%",
   height: "auto",
   aspectRatio: 1,
-  backgroundColor: "$pink600",
+  backgroundColor: "$blue600",
   borderRadius: "50%",
 });

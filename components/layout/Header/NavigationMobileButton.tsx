@@ -36,6 +36,6 @@ const ListLink = styled("a", {
   fontSize: "$xl",
   cursor: "pointer",
   "&:hover": {
-    color: "$pink800",
+    color: "$blue800",
   },
 });

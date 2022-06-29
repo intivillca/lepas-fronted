@@ -44,7 +44,7 @@ export const Heading = ({
     variants: {
       fontColor: {
         pink: {
-          color: "$pink700",
+          color: "$blue700",
         },
         white: {
           color: "White",

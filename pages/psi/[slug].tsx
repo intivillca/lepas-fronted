@@ -25,7 +25,6 @@ const Psi: NextPage<Props> = ({ data }: Props) => {
 export async function getStaticPaths() {
   const res = await fetchAPI("/psi", { populate: "*" });
   const paths = res.data.map((pas: any) => `/psi${pas.attributes.slug}`);
-  console.log(paths);
   return {
     paths: [...paths] || [],
     fallback: true,
@@ -39,14 +38,12 @@ interface GSProps {
 export async function getStaticProps({
   params,
 }: GSProps): Promise<{ props: {}; revalidate: number }> {
-  console.log(params);
   const APIRes = await fetchAPI("/psi", {
     populate: "*",
     filters: {
       slug: `/${params.slug}`,
     },
   });
-  console.log(APIRes);
   return {
     props: { data: APIRes.data },
     revalidate: 60,

@@ -8,7 +8,6 @@ interface Props {
   meta: {};
 }
 const HappyEverAfters: NextPage<Props> = ({ data, meta }: Props) => {
-  console.log(data, meta);
   return (
     <BlogCardGroup>
       {data.map((blog, idx) => (
@@ -30,7 +29,6 @@ export async function getStaticProps() {
   const APIRes = await fetchAPI("/happy-ever-afters", {
     populate: "*",
   });
-  console.log(APIRes);
   return {
     props: {
       data: APIRes.data,

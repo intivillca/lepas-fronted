@@ -35,6 +35,6 @@ const ListLink = styled("a", {
   fontFamily: "'Baloo Tamma 2', cursive",
   cursor: "pointer",
   "&:hover": {
-    color: "$pink800",
+    color: "$blue800",
   },
 });

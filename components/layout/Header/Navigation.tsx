@@ -9,12 +9,14 @@ import { MdClose } from "react-icons/md";
 import { useToggle } from "react-use";
 import { keyframes } from "@stitches/react";
 import { NavigationMobileButton } from "./NavigationMobileButton";
+import { getImageLink } from "../../../utils/parseImageLink";
 
 export interface NavigationProps {
   navigation: NavigationInterface[];
   brand?: ReactNode;
   socialmediabuttons?: ReactNode;
   divider?: boolean;
+  pattern: any;
 }
 
 export const Navigation = ({
@@ -22,9 +24,29 @@ export const Navigation = ({
   brand,
   socialmediabuttons,
   divider = false,
+  pattern,
 }: NavigationProps) => {
   const isMobile = useMediaQuery({ maxWidth: 900 });
   const [open, setOpen] = useToggle(false);
+  const NavigationHeader = styled("header", {
+    zIndex: "2",
+    textAlign: "center",
+    position: "sticky",
+    paddingBottom: "16px",
+    top: "0",
+    background: `url(${getImageLink({
+      media: pattern,
+    })}) center bottom repeat-x`,
+    "&::after": {
+      clear: "both",
+      content: ".",
+      display: "block",
+      fontSize: "0",
+      height: "0",
+      lineHeight: "0",
+      overflow: "hidden",
+    },
+  });
   return (
     <NavigationHeader>
       <NavigationBackground>
@@ -47,7 +69,7 @@ export const Navigation = ({
           {isMobile && !open && (
             <GiHamburgerMenu
               size={32}
-              color="pink"
+              color="hsl(206, 97%, 76.7%)"
               onClick={setOpen}
               style={{ marginRight: "20px" }}
             />
@@ -55,7 +77,7 @@ export const Navigation = ({
           {isMobile && open && (
             <MdClose
               size={32}
-              color="pink"
+              color="hsl(206, 97%, 76.7%)"
               onClick={setOpen}
               style={{ marginRight: "20px" }}
             />
@@ -83,24 +105,7 @@ const NavigationBackground = styled("div", {
   width: "100%",
   backgroundColor: "white",
 });
-const NavigationHeader = styled("header", {
-  zIndex: "2",
-  textAlign: "center",
-  position: "sticky",
-  paddingBottom: "16px",
-  top: "0",
-  background:
-    "url(http://demo.mage-themes.com/template/paws/paws/images/halfcircle_pattern.png) center bottom repeat-x",
-  "&::after": {
-    clear: "both",
-    content: ".",
-    display: "block",
-    fontSize: "0",
-    height: "0",
-    lineHeight: "0",
-    overflow: "hidden",
-  },
-});
+
 const NavigationContainer = styled("div", {
   maxWidth: "$xl5",
   boxSizing: "border-box",

@@ -14,9 +14,8 @@ const PrivremeniSmjestaj: NextPage<PrivremeniSmjestajProps> = ({
   clanak,
   slika,
 }: PrivremeniSmjestajProps) => {
-  console.log(slika);
   return (
-    <Section sectionColor={"pink"} >
+    <Section sectionColor={"pink"}>
       <Wrapper>
         <ReactMarkdown className="markup">{clanak}</ReactMarkdown>
       </Wrapper>
@@ -43,7 +42,7 @@ const Wrapper = styled("div", {
   maxWidth: "$xl5",
   margin: "0 auto",
   padding: "20px",
-  minHeight: '70vh',
+  minHeight: "70vh",
   "@bp2": {
     gridTemplateColumns: "repeat(4, 1fr)",
   },

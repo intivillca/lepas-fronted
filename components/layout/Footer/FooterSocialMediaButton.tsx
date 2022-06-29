@@ -55,7 +55,7 @@ const ListLink = styled("a", {
   color: "inherit",
   opacity: "0.75",
   "&:hover": {
-    color: "$pink800",
+    color: "$blue800",
     border: "1px solid",
   },
 });

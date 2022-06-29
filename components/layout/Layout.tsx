@@ -1,7 +1,10 @@
+import { NextSeo } from "next-seo";
+import Head from "next/head";
 import { ReactNode } from "react";
 import { useQuery } from "react-query";
 import { fetchAPI } from "../../api/api";
 import { styled } from "../../stitches.config";
+import { getImageLink } from "../../utils/parseImageLink";
 import { Footer } from "./Footer/Footer";
 import { Navigation } from "./Header/Navigation";
 import { NavigationBrand } from "./Header/NavigationBrand";
@@ -18,6 +21,13 @@ const getLayoutData = async () => {
       footer: "*",
       socialmedia: "*",
       logo: "*",
+      defaultseo: {
+        populate: "*",
+      },
+      favicon: "*",
+      Patterns: {
+        populate: "*",
+      },
     },
   });
   return APIRes.data.attributes;
@@ -35,19 +45,32 @@ export const Layout = ({ children }: LayoutProps) => {
   const logo = data?.logo ?? {};
   if (isLoading) return <>Loading...</>;
   return (
-    <PageWrapper>
-      <Navigation
-        navigation={navigation}
-        brand={<NavigationBrand logo={logo} />}
-        socialmediabuttons={
-          <NavigationSocialMediaButtons socialmedia={socialMedia} />
-        }
-        divider={true}
-      />
-      <BgFix>{children}</BgFix>
-      <ScrollToTop />
-      <Footer navigation={navigation} socialmedia={socialMedia} />
-    </PageWrapper>
+    <>
+      <Head>
+        <link
+          rel="shortcut icon"
+          href={getImageLink({ media: data.favicon })}
+        />
+      </Head>
+      <PageWrapper>
+        <NextSeo
+          title={data.defaultseo.title}
+          description={data.defaultseo.description}
+        />
+        <Navigation
+          pattern={data.Patterns[0].patternImg}
+          navigation={navigation}
+          brand={<NavigationBrand logo={logo} />}
+          socialmediabuttons={
+            <NavigationSocialMediaButtons socialmedia={socialMedia} />
+          }
+          divider={true}
+        />
+        <BgFix>{children}</BgFix>
+        <ScrollToTop />
+        <Footer navigation={navigation} socialmedia={socialMedia} />
+      </PageWrapper>
+    </>
   );
 };
 

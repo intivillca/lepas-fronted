@@ -70,4 +70,5 @@ const ImageContainer = styled("div", {
   width: "$full",
   height: "auto",
   overflow: "hidden",
+  backgroundColor: "white",
 });
