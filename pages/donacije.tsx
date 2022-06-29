@@ -34,15 +34,7 @@ const Donacije: NextPage<DonacijeProps> = ({ slika, zaglavlje, donacije }) => {
         <RacuniWrapper>
           <Text color="black">
             <span style={{ fontWeight: "bolder" }}>IBAN: </span>
-            HR3923600001102884721{" "}
-            <span style={{ fontWeight: "bolder" }}>SWIFT: </span> ZABAHR2X
-          </Text>
-          <Text>
-            <span style={{ fontWeight: "bolder" }}>PAYPAL: </span>
-            udruga@lepas.hr
-          </Text>
-          <Text>
-            <span style={{ fontWeight: "bolder" }}>KEKSPAY: </span>0981397298
+            HR5224070001100005210
           </Text>
         </RacuniWrapper>
       </Section>
