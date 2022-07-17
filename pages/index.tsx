@@ -110,30 +110,6 @@ const Home: NextPage<HomeProps> = ({
           ))}
         </AnimalCardGroup>
       </Section>
-
-      <Section sectionColor={"white"}>
-        <Heading heading="h2" variant="pink" style={{ mb: "2rem" }}>
-          {macke.naslov}
-        </Heading>
-        <SubHeading
-          heading={"h3"}
-          variant={"black"}
-          style={{ marginBottom: "2rem" }}
-        >
-          {macke.tekst}
-        </SubHeading>
-        <AnimalCardGroup>
-          {ParseMacke(macke.macka.data).map((macka, idx) => (
-            <AnimalCard
-              key={idx}
-              ime={macka.ime}
-              slika={macka.slika}
-              slug={macka.slug}
-              path={"macke"}
-            />
-          ))}
-        </AnimalCardGroup>
-      </Section>
     </>
   );
 };

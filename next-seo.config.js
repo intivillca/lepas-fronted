@@ -1,10 +1,10 @@
 export default {
-  title: "Le Pas web",
-  description: "Le Pas Web",
+  title: "Animadvor web",
+  description: "Animadvor Web",
   openGraph: {
     type: "website",
     locale: "en_EN",
     url: "",
-    site_name: "Le Pas Web",
+    site_name: "Animadvor Web",
   },
 };

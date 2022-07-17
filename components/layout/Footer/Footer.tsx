@@ -1,12 +1,11 @@
 import { styled } from "../../../stitches.config";
 import { NavigationInterface, SocialMedia } from "../../../types/LayoutTypes";
-import { Navigation } from "../Header/Navigation";
 import { FooterSocialMediaButton } from "./FooterSocialMediaButton";
 export interface FooterProps {
   navigation: NavigationInterface[];
   socialmedia: SocialMedia[];
 }
-export const Footer = ({ navigation, socialmedia }: FooterProps) => {
+export const Footer = ({ socialmedia }: FooterProps) => {
   return (
     <FooterComponent>
       <FooterContainer>
@@ -19,10 +18,10 @@ export const Footer = ({ navigation, socialmedia }: FooterProps) => {
             />
           ))}
         </SocialMediaCircleContainer>
-        <Copyright>LePas © 2022</Copyright>
+        <Copyright>Animadvor © 2022</Copyright>
+        <Copyright>Izradio <Link href="mailto:intivillca@gmail.com">Inti Villca</Link> student <Link href="https://www.tvz.hr/">Tehničkog veleučilišta u Zagrebu</Link> kao dio projekta</Copyright>
         <Donate>
-          IBAN: HR3923600001102884721 SWIFT: ZABAHR2X PAYPAL: udruga@lepas.hr
-          KEKSPAY: 0981397298
+        IBAN: HR5224070001100005210
         </Donate>
       </FooterContainer>
     </FooterComponent>
@@ -60,11 +59,23 @@ const SocialMediaCircleContainer = styled("div", {
 });
 const Copyright = styled("div", {
   textAlign: "center",
-  fontSize: "13px",
+  fontSize: "1rem",
   color: "#aaa",
+  py: '0.5rem'
 });
 const Donate = styled("div", {
   textAlign: "center",
-  fontSize: "13px",
+  fontSize: "1rem",
   color: "#aaa",
 });
+
+const Link = styled('a', {
+  color: '#abf',
+  textDecoration: 'none',
+
+  '&:hover' :{color: '#adf', textDecoration:'underline'},
+  '&:visited' :{},
+  '&:active' :{},
+  '&:link' :{},
+
+})
