@@ -29,12 +29,19 @@ const Donacije: NextPage<DonacijeProps> = ({ slika, zaglavlje, donacije }) => {
             marginBottom: "2.25rem",
           }}
         >
-          Racuni
+          Računi
         </Heading>
         <RacuniWrapper>
           <Text color="black">
+            <span style={{ fontWeight: "bolder" }}>OTP BANKA </span>
+          </Text>
+          <Text color="black">
             <span style={{ fontWeight: "bolder" }}>IBAN: </span>
             HR5224070001100005210
+          </Text>
+          <Text color="black">
+            <span style={{ fontWeight: "bolder" }}>SWIFT: </span>
+            OTPVHR2X
           </Text>
         </RacuniWrapper>
       </Section>

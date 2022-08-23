@@ -49,42 +49,6 @@ const ONama: NextPage<Props> = ({
         </SubHeading>
         <Features features={onama} />
       </Section>
-      <Section
-        sectionColor="pink"
-        style={{
-          padding: "0 2rem",
-          width: "auto",
-          marginBottom: "2.25rem 0",
-        }}
-      >
-        <Heading heading="h2" variant="white" style={{ marginTop: "32px" }}>
-          {zaglavljeStatistika.naslov}
-        </Heading>
-        <SubHeading heading="h2" variant="white">
-          {zaglavljeStatistika.tekst}
-        </SubHeading>
-        <StatCardWrapper>
-          {statistika.map((stat: any) => (
-            <StatCard key={stat.id}>
-              <Heading
-                heading="h2"
-                variant={"pink"}
-                style={{ margin: "0", width: "100%", textAlign: "center" }}
-              >
-                <CountUp end={stat.broj} redraw={false} duration={3}>
-                  {({ countUpRef, start }) => (
-                    <VisibilitySensor onChange={start} delayedCall>
-                      <span ref={countUpRef} />
-                    </VisibilitySensor>
-                  )}
-                </CountUp>
-              </Heading>
-
-              <Text>{stat.tekst}</Text>
-            </StatCard>
-          ))}
-        </StatCardWrapper>
-      </Section>
 
       <Section
         sectionColor={"image"}

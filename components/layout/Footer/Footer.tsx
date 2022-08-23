@@ -19,10 +19,20 @@ export const Footer = ({ socialmedia }: FooterProps) => {
           ))}
         </SocialMediaCircleContainer>
         <Copyright>Animadvor © 2022</Copyright>
-        <Copyright>Izradio <Link href="mailto:intivillca@gmail.com">Inti Villca</Link> student <Link href="https://www.tvz.hr/">Tehničkog veleučilišta u Zagrebu</Link> kao dio projekta</Copyright>
-        <Donate>
-        IBAN: HR5224070001100005210
-        </Donate>
+        <Copyright>
+          Sponzorirano od{" "}
+          <Link href="https://fastserver.hr/">Fastserver.hr</Link>
+        </Copyright>
+        <Copyright>
+          Izradio{" "}
+          <Link href="mailto:intivillca@gmail.com">student Inti Villca</Link>{" "}
+          kao dio projekta{" "}
+          <Link href="https://www.tvz.hr/">
+            Tehničkog veleučilišta u Zagrebu
+          </Link>
+        </Copyright>
+        <Copyright>OTP banka IBAN: HR5224070001100005210</Copyright>
+        <Copyright>SWIFT: OTPVHR2X</Copyright>
       </FooterContainer>
     </FooterComponent>
   );
@@ -61,7 +71,7 @@ const Copyright = styled("div", {
   textAlign: "center",
   fontSize: "1rem",
   color: "#aaa",
-  py: '0.5rem'
+  py: "0.5rem",
 });
 const Donate = styled("div", {
   textAlign: "center",
@@ -69,13 +79,12 @@ const Donate = styled("div", {
   color: "#aaa",
 });
 
-const Link = styled('a', {
-  color: '#abf',
-  textDecoration: 'none',
+const Link = styled("a", {
+  color: "#abf",
+  textDecoration: "none",
 
-  '&:hover' :{color: '#adf', textDecoration:'underline'},
-  '&:visited' :{},
-  '&:active' :{},
-  '&:link' :{},
-
-})
+  "&:hover": { color: "#adf", textDecoration: "underline" },
+  "&:visited": {},
+  "&:active": {},
+  "&:link": {},
+});

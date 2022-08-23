@@ -74,15 +74,14 @@ const Home: NextPage<HomeProps> = ({
         }}
       >
         <Heading heading="h2" variant="pink" style={{ mb: "2rem" }}>
-          Kako mozete pomoci?
+          Kako mozete pomoći?
         </Heading>
         <SubHeading
           heading={"h3"}
           variant={"black"}
           style={{ marginBottom: "2rem" }}
         >
-          In ad deserunt sit ut. Do duis voluptate ea cillum. Duis irure dolor
-          excepteur anim magna mollit. Tempor non magna qui nostrud elit mollit
+          Svaka akcija koju učinite jako pomaže našim štičenicima
         </SubHeading>
         <ActionCards akcije={akcije} />
       </Section>
